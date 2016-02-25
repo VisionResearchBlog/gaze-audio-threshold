@@ -1,6 +1,6 @@
 global EXPWIN GREY Calib 
 MONITOR=0; %set to zero for running exp 
-SKIP_SYNC=0; %Should be set to 0 when running exp, 1 for programming
+SKIP_SYNC=1; %Should be set to 0 when running exp, 1 for programming
 DEBUG=0; %turn  to 1 if already have calibrated eye 
 
 %eyetrackerhost = 'TX300-010102211502.local.' %brian's tracker 
@@ -25,7 +25,8 @@ Constants.MaximumPerformanceTrialNum=4; %how many trials at top before we stop t
 Constants.MinimumPerformanceTrialNum=6; %how many trials at bottom before we stop trial
 Constants.MaxReversals=11; %how many reversals before stopping testing
 
-
+Constants.TrainingTrials=1; %if it is training  
+Constants.AnimatedTrials=3; %how many trials at beginning need animated fixaiton point
 Constants.IncorrectTimeOut=1.5;
 Constants.ShakeFixThresh=120; %when to start attention grabber 120frames = 2s
 Constants.FixThreshFixationImage=18; %18*16.67=300ms

@@ -6,7 +6,6 @@ ISI=Constants.ISI_MIN;
 [pahandle, buffer]=LoadSoundSchedule(wavfilenames,Constants.audiodir);
 [AudioStimList,CorrectLocation]=generateTrials(Constants);
 
-
 %else keep all the wavs but set a range
 if(Constants.AudioStimulusHeldConstant==Constants.LOW)
     %rng=10:-1:2;
@@ -18,10 +17,8 @@ elseif(Constants.AudioStimulusHeldConstant==Constants.HIGH)
     constantStim=length(wavfilenames);
 end
 
-
 while(training)
-    
-    
+
     trial=trial+1;
     PsychPortAudio('UseSchedule', pahandle, 1);
     %we need to determine the appropriate sound to play for this trial
@@ -40,16 +37,18 @@ while(training)
     end
     %end
     
-    
-    
     %display fix %& wait for fixation
     InitAV;
     
     disp(['Start' num2str(trial) ', step size: ' num2str( StepStimulus(trial)) ])
     
     VisStimInit=0;
-    
-    animate_fix=Constants.animate_fix;
+
+    if(trial<=Constants.AnimatedTrials)
+        animate_fix=Constants.animate_fix;
+    else
+        animate_fix=0;
+    end
     
     while(~finished)
         
@@ -100,7 +99,7 @@ while(training)
                                     trialScore(trial)=1;
                                 else
                                     Screen('DrawTexture', EXPWIN, blockTex_Incorrect, ...
-                                        bRect_Incorrect, LeftChoiceSquare,animate_fix);
+                                        bRect_Incorrect, LeftChoiceSquare);
                                     %display incorrect X
                                     finished=1;
                                     Screen(EXPWIN,'Flip');
@@ -122,7 +121,7 @@ while(training)
                                     trialScore(trial)=1;
                                 else
                                     Screen('DrawTexture', EXPWIN, blockTex_Incorrect, ...
-                                        bRect_Incorrect, RightChoiceSquare,animate_fix);
+                                        bRect_Incorrect, RightChoiceSquare);
                                     %display incorrect X
                                     finished=1;
                                     Screen(EXPWIN,'Flip');

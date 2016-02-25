@@ -4,7 +4,7 @@ if(length(StepStimulus)>Constants.MaximumPerformanceTrialNum)
     
     %are we at top level of difficulty
     if(sum(StepStimulus(end-(Constants.MaximumPerformanceTrialNum-1):end)))/Constants.MaximumPerformanceTrialNum == length(rng)
-        %are we 100% correct
+        %are we 100% correct?
         if(sum(trialScore(end-(Constants.MaximumPerformanceTrialNum-1):end))==...
                 Constants.MaximumPerformanceTrialNum)
             PerfCode=1; %max
@@ -15,9 +15,16 @@ if(length(StepStimulus)>Constants.MaximumPerformanceTrialNum)
     
 end
 
+%if fail & lowest rung, trigger teaching
+%if(trialScore(end)==0 & StepStimulus==1)
+
 if(length(StepStimulus)>Constants.MinimumPerformanceTrialNum)
+    %have you been at lowest level for # of trials & they have been all
+    %fails?
     if( sum(~trialScore(end-(Constants.MinimumPerformanceTrialNum-1):end))==...
-            Constants.MinimumPerformanceTrialNum ) %min performance
+            Constants.MinimumPerformanceTrialNum && ...
+            sum(StepStimulus(end-(Constants.MinimumPerformanceTrialNum-1):end))==...
+            Constants.MinimumPerformanceTrialNum)%min performance
         training=0;
         PerfCode=2; %min
         disp('Lowest level of performance, exiting')
