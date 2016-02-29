@@ -78,7 +78,6 @@ while(training)
                     left_xy(end,:),Calib,RightChoiceSquare,Constants.AOI_border);
                 EyeInsideLR(end,3)=0;
                 
-                
                 AllEyeData= [AllEyeData; zeros(size(left_xyTMP,1),1)+EyeTime(end) ...
                     left_xyTMP right_xyTMP left_pupilTMP right_pupilTMP ...
                     left_validityTMP right_validityTMP];
@@ -93,11 +92,13 @@ while(training)
                                 if(CorrectLocation(trial)==Constants.LEFT)
                                     %PlayMovie([Constants.imagedir VidDirList(fn).name],LeftChoiceSquare)
                                     moviename=[Constants.imagedir VidDirList(fn).name]; rect=LeftChoiceSquare;
+                                    playFixAnimation
                                     PlayMovie
                                     
                                     finished=1;
                                     trialScore(trial)=1;
                                 else
+                                    playFixAnimation
                                     Screen('DrawTexture', EXPWIN, blockTex_Incorrect, ...
                                         bRect_Incorrect, LeftChoiceSquare);
                                     %display incorrect X
@@ -115,11 +116,12 @@ while(training)
                                 if(CorrectLocation(trial)==Constants.RIGHT)
                                     %PlayMovie([Constants.imagedir VidDirList(fn).name],RightChoiceSquare)
                                     moviename=[Constants.imagedir VidDirList(fn).name]; rect=RightChoiceSquare;
+                                    playFixAnimation
                                     PlayMovie
-                                    
                                     finished=1;
                                     trialScore(trial)=1;
                                 else
+                                    playFixAnimation
                                     Screen('DrawTexture', EXPWIN, blockTex_Incorrect, ...
                                         bRect_Incorrect, RightChoiceSquare);
                                     %display incorrect X

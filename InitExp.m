@@ -73,6 +73,15 @@ blockTex_Incorrect=Screen('MakeTexture', EXPWIN, imdata);
 bRect_Incorrect=Screen('Rect', blockTex_Incorrect);
 
 
+
+[imdata,map,alpha] =imread([REWARD_DIRECTORY Rwd_Img1]);
+blockTex_RWD1=Screen('MakeTexture', EXPWIN, imdata);
+bRect_RWD1=Screen('Rect', blockTex_Incorrect);
+[imdata,map,alpha] =imread([REWARD_DIRECTORY Rwd_Img2]);
+blockTex_RWD2=Screen('MakeTexture', EXPWIN, imdata);
+bRect_RWD2=Screen('Rect', blockTex_Incorrect);
+
+
 trial=0;
 
 %always start at most different stim

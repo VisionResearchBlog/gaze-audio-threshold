@@ -1,10 +1,10 @@
 global EXPWIN GREY Calib 
-MONITOR=0; %set to zero for running exp 
+MONITOR=1; %set to zero for running exp 
 SKIP_SYNC=1; %Should be set to 0 when running exp, 1 for programming
 DEBUG=0; %turn  to 1 if already have calibrated eye 
 
-%eyetrackerhost = 'TX300-010102211502.local.' %brian's tracker 
-eyetrackerhost = 'TX300-010105528621.local.' %ellie's tracker
+eyetrackerhost = 'TX300-010102211502.local.' %brian's tracker 
+%eyetrackerhost = 'TX300-010105528621.local.' %ellie's tracker
 
 Constants.FixThresh=30; %30*16.67=500ms @ 60hz samples Fixation Duration Movie Target
 Constants.trialTime=4; %trial timeout - 4 seconds
@@ -49,6 +49,12 @@ RHYTHM_HUMAN=[expdir '\STIMULI\AUDIO\rhythm human\'];
 
 
 VOLUME=[expdir '\STIMULI\AUDIO\volume\'];
+
+REWARD_DIRECTORY=[expdir '\STIMULI\VISUAL\rewards\'];
+%Rwd_Img1='cauldron.tif'; Rwd_Img2='coins.tif';
+%Rwd_Img1='jelly bean jar.tif'; Rwd_Img2='jelly beans.tif';
+Rwd_Img1='star box.tif'; Rwd_Img2='star.tif'; 
+
 
 ALIEN_DIRECTORY=[expdir '\STIMULI\VISUAL\Aliens\'];
 DINO_DIRECTORY=[expdir '\STIMULI\VISUAL\Dinos\'];

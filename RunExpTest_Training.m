@@ -114,11 +114,15 @@ while(training)
                                 %evaluate if we are correct
                                 if(CorrectLocation(trial)==Constants.LEFT)
                                     %([Constants.imagedir VidDirList(fn).name],LeftChoiceSquare)
+                                    if(Constants.animate_fix==0)
+                                        playFixAnimation
+                                    end
                                     moviename=[Constants.imagedir VidDirList(fn).name]; rect=LeftChoiceSquare;
                                     PlayMovie
                                     finished=1;
                                     trialScore(trial)=1;
                                 elseif(Constants.LRvisible == 0)
+                                    playFixAnimation
                                     Screen('DrawTexture', EXPWIN, blockTex_Incorrect, bRect_Incorrect, LeftChoiceSquare);
                                     %display incorrect X
                                     finished=1;
@@ -134,11 +138,16 @@ while(training)
                                 %evaluate if we are correct
                                 if(CorrectLocation(trial)==Constants.RIGHT)
                                     %PlayMovie([Constants.imagedir VidDirList(fn).name],RightChoiceSquare)
+                                    if(Constants.animate_fix==0)
+                                        playFixAnimation
+                                    end
+                                    
                                     moviename=[Constants.imagedir VidDirList(fn).name]; rect=RightChoiceSquare;
                                     PlayMovie
                                     finished=1;
                                     trialScore(trial)=1;
                                 elseif(Constants.LRvisible == 0)
+                                    playFixAnimation
                                     Screen('DrawTexture', EXPWIN, blockTex_Incorrect, bRect_Incorrect, RightChoiceSquare);
                                     %display incorrect X
                                     finished=1;

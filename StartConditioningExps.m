@@ -25,7 +25,7 @@ Constants.StimulusAssignment=Constants.HiLeft_LoRight;
 Constants.AudioStimulusHeldConstant=Constants.HIGH; % for PITCH - it MUST be this one - HIGH held constant so that the difficult trials are at the end and not at the start.
 
 %load movie to keep attention
-attnObj=VideoReader([pwd '\STIMULI\VISUAL\' 'Pocoyo 3x00 El Show de Pocoyo.mov']);
+%attnObj=VideoReader([pwd '\STIMULI\VISUAL\' 'Pocoyo 3x00 El Show de Pocoyo.mov']);
 %----------- Edit Here to select which part of experiment you want to run
 
 
@@ -52,7 +52,6 @@ end
 
 if(~ESC_PRESSED)
 %---Training Parts 1C----- Now we don't use animation
-Constants.animate_fix=0;
 Constants.TrainHiLo=1; %1=Hi, 2=Low
 Constants.savefile=[expdir 'data\' savename '.' num2str(GetSecs) '.Train1C.data.mat'];
 RunExpTest_Training
