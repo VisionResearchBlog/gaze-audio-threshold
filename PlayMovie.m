@@ -21,6 +21,7 @@ vidObj=VideoReader(moviename);
 ctr=0;
 
 while(vidObj.hasFrame)
+    
     tex=Screen('MakeTexture', EXPWIN, vidObj.readFrame);
     Screen('DrawTexture', EXPWIN, tex,[],rect);
     Screen('Flip', EXPWIN);
@@ -42,7 +43,8 @@ while(vidObj.hasFrame)
     WaitSecs(1/25); %movies are 30 hz
 end
 
-if(~isempty( regexp(moviename,'11','ONCE') ))
+%dumb regexp can handle multiple patterns reread how to eval
+if( ~isempty(regexp(moviename,'11','ONCE')) | ~isempty(regexp(moviename,'12','ONCE'))   )
     notdone=1;
     ctr=0; px_c=150;
     while(notdone)

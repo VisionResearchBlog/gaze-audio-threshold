@@ -1,4 +1,4 @@
-global EXPWIN KEYBOARD SPACEKEY CENTER WHITE BLACK Calib
+global EXPWIN KEYBOARD SPACEKEY CENTER GREY Calib
 
 
 %**************************
@@ -12,8 +12,6 @@ Screen('Preference','SkipSyncTests',1);
 %Window variables
 CENTER = [round((Calib.screen.width - Calib.screen.x)/2) ...
     round((Calib.screen.height -Calib.screen.y)/2)];
-BLACK = BlackIndex(EXPWIN); 
-WHITE = WhiteIndex(EXPWIN);
 KEYBOARD=max(GetKeyboardIndices);
 SPACEKEY = 32;%Windows system key code
 
@@ -52,7 +50,7 @@ TrackStatus(Calib);
 disp('Starting Calibration workflow');
 [pts, TrackError,calibplot] = HandleCalibWorkflow(Calib,Constants);
 disp('Calibration workflow stopped');
-Screen('FillRect',EXPWIN,BLACK);
+Screen('FillRect',EXPWIN,GREY);
 Screen(EXPWIN,'Flip');
  
 %*********************

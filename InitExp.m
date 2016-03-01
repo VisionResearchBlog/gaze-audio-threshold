@@ -9,7 +9,8 @@ Screen('TextStyle', EXPWIN, 1);
 Screen('TextFont',EXPWIN, 'Arial');
 Screen('TextSize',EXPWIN, 24);
 
-VidDirList=dir([Constants.imagedir '*.mp4']);
+%Constants.fixpoint_img
+VidDirList=dir([Constants.imagedir Constants.fixpoint_img(1) '*.mp4']);
 WavDirList=dir([Constants.audiodir '*.wav']);
 
 %write wav names in string
@@ -47,21 +48,17 @@ RightChoiceSquare=[3*(Calib.screen.width/4)-Constants.sXY(1)/2, ...
 
 
 
-if(Constants.trackEyes)
-    if(DEBUG)
-        try
-            tetio_stopTracking;
-        end
-        tetio_startTracking;
-        
-    else
-        Tobii_calibration_with_psychtoolbox;
-        tetio_startTracking;
-        mOrder = randperm(Calib.points.n);
-        EyeErrorTestStart=TestEyeTrackerError(Calib,mOrder,Constants);
-        
-        %ClickToBegin
+if(DEBUG)
+    try
+        tetio_stopTracking;
     end
+    tetio_startTracking;
+    
+else
+    Tobii_calibration_with_psychtoolbox;
+    tetio_startTracking;
+    mOrder = randperm(Calib.points.n);
+    EyeErrorTestStart=TestEyeTrackerError(Calib,mOrder,Constants);
 end
 
 

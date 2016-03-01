@@ -42,18 +42,20 @@ if(Constants.TrainHiLo~=3) %low &hi training
         end
     end
 end
-  
+
 
 while(training)
     
     trial=trial+1;
-    s = PsychPortAudio('GetStatus', pahandle);    
-
+    animate_fix=1;
+    
+    s = PsychPortAudio('GetStatus', pahandle);
+    
     while (s.Active) % wait for press
         s = PsychPortAudio('GetStatus', pahandle);
         WaitSecs(0.01)
     end
-
+    
     PsychPortAudio('UseSchedule', pahandle, 1);
     %we need to determine the appropriate sound to play for this trial
     if(Constants.TrainHiLo==3)
@@ -64,111 +66,100 @@ while(training)
     
     %display fix point & start sound
     InitAV;
-    
     VisStimInit=0;
-    if(trial<=3)
-        animate_fix=Constants.animate_fix;
-    else
-        animate_fix=0;
-    end
+    
+    
+    
+    drawQuestionMark;
+    
+    moviename=[Constants.imagedir 'listen_' Constants.fixpoint_img '.mp4'];
+    rect=FixationSquare;
+    PlayMovieBegin;
     
     while(~finished)
         
-        %Screen('FillRect', EXPWIN, GREY);
-        %Screen('FillRect', EXPWIN, choiceColors, ...
-        %    [LeftChoiceSquare; RightChoiceSquare]');
-        
         drawQuestionMark;
         
-        if(Constants.trackEyes)
+        [left_xyTMP, right_xyTMP, left_pupilTMP, right_pupilTMP, ...
+            left_validityTMP, right_validityTMP, emptyset]=...
+            GetEyeData(ScreenTime(end-1), ScreenTime(end));
+        
+        if(~emptyset)
+            left_xy(end+1,:)=left_xyTMP(end,:);
+            right_xy(end+1,:)=right_xyTMP(end,:);
+            left_pupil(end+1,:)=left_pupilTMP(end,:);
+            right_pupil(end+1,:)=right_pupilTMP(end,:);
+            left_validity(end+1,:)=left_validityTMP(end,:);
+            right_validity(end+1,:)=right_validityTMP(end,:);
+            EyeTime(end+1)=ScreenTime(end);
             
-            [left_xyTMP, right_xyTMP, left_pupilTMP, right_pupilTMP, ...
-                left_validityTMP, right_validityTMP, emptyset]=...
-                GetEyeData(ScreenTime(end-1), ScreenTime(end));
+            EyeInsideLR(end+1,1)=EyeInAOI_Median(right_xy(end,:),...
+                left_xy(end,:),Calib,LeftChoiceSquare,Constants.AOI_border);
+            EyeInsideLR(end,2)=EyeInAOI_Median(right_xy(end,:),...
+                left_xy(end,:),Calib,RightChoiceSquare,Constants.AOI_border);
+            EyeInsideLR(end,3)=0;
             
-            if(~emptyset)
-                left_xy(end+1,:)=left_xyTMP(end,:);
-                right_xy(end+1,:)=right_xyTMP(end,:);
-                left_pupil(end+1,:)=left_pupilTMP(end,:);
-                right_pupil(end+1,:)=right_pupilTMP(end,:);
-                left_validity(end+1,:)=left_validityTMP(end,:);
-                right_validity(end+1,:)=right_validityTMP(end,:);
-                EyeTime(end+1)=ScreenTime(end);
-                
-                EyeInsideLR(end+1,1)=EyeInAOI_Median(right_xy(end,:),...
-                    left_xy(end,:),Calib,LeftChoiceSquare,Constants.AOI_border);
-                EyeInsideLR(end,2)=EyeInAOI_Median(right_xy(end,:),...
-                    left_xy(end,:),Calib,RightChoiceSquare,Constants.AOI_border);
-                EyeInsideLR(end,3)=0;
-                
-                AllEyeData= [AllEyeData; zeros(size(left_xyTMP,1),1)+EyeTime(end) ...
-                    left_xyTMP right_xyTMP left_pupilTMP right_pupilTMP ...
-                    left_validityTMP right_validityTMP];
-                
-                if(length(EyeInsideLR)>Constants.FixThresh)
-                    %LOOKING AT LEFT SIDE AOI
-                    if(EyeInsideLR(end,1)==1 & EyeInsideLR(end,2)==0)
-                        %don´t chnage if we are in a nonvisble trial
-                        if(Constants.LRvisible ~= 2); %2=right only visible
-                            if(sum(EyeInsideLR(end-Constants.FixThresh:end,1))>=Constants.FixThresh)
-                                %evaluate if we are correct
-                                if(CorrectLocation(trial)==Constants.LEFT)
-                                    %([Constants.imagedir VidDirList(fn).name],LeftChoiceSquare)
-                                    if(Constants.animate_fix==0)
-                                        playFixAnimation
-                                    end
-                                    moviename=[Constants.imagedir VidDirList(fn).name]; rect=LeftChoiceSquare;
-                                    PlayMovie
-                                    finished=1;
-                                    trialScore(trial)=1;
-                                elseif(Constants.LRvisible == 0)
-                                    playFixAnimation
-                                    Screen('DrawTexture', EXPWIN, blockTex_Incorrect, bRect_Incorrect, LeftChoiceSquare);
-                                    %display incorrect X
-                                    finished=1;
-                                    Screen(EXPWIN,'Flip');
-                                    WaitSecs(Constants.IncorrectTimeOut);
-                                end
+            AllEyeData= [AllEyeData; zeros(size(left_xyTMP,1),1)+EyeTime(end) ...
+                left_xyTMP right_xyTMP left_pupilTMP right_pupilTMP ...
+                left_validityTMP right_validityTMP];
+            
+            if(animate_fix)
+                playFixAnimation
+                animate_fix=0;
+            end
+            
+            if(length(EyeInsideLR)>Constants.FixThresh)
+                %LOOKING AT LEFT SIDE AOI
+                if(EyeInsideLR(end,1)==1 & EyeInsideLR(end,2)==0)
+                    %don´t chnage if we are in a nonvisble trial
+                    if(Constants.LRvisible ~= 2); %2=right only visible
+                        if(sum(EyeInsideLR(end-Constants.FixThresh:end,1))>=Constants.FixThresh)
+                            %evaluate if we are correct
+                            if(CorrectLocation(trial)==Constants.LEFT)
+                                moviename=[Constants.imagedir VidDirList(fn).name];
+                                rect=LeftChoiceSquare;
+                                PlayMovie
+                                finished=1;
+                                trialScore(trial)=1;
+                            elseif(Constants.LRvisible == 0)
+                                Screen('DrawTexture', EXPWIN, ...
+                                    blockTex_Incorrect,...
+                                    bRect_Incorrect, LeftChoiceSquare);
+                                %display incorrect X
+                                finished=1;
+                                Screen(EXPWIN,'Flip');
+                                WaitSecs(Constants.IncorrectTimeOut);
                             end
                         end
-                        %LOOKING AT RIGHT SIDE AOI
-                    elseif(EyeInsideLR(end,1)==0 & EyeInsideLR(end,2)==1)
-                        if(Constants.LRvisible ~= 1); %1=left only visible
-                            if(sum(EyeInsideLR(end-Constants.FixThresh:end,2))>=Constants.FixThresh)
-                                %evaluate if we are correct
-                                if(CorrectLocation(trial)==Constants.RIGHT)
-                                    %PlayMovie([Constants.imagedir VidDirList(fn).name],RightChoiceSquare)
-                                    if(Constants.animate_fix==0)
-                                        playFixAnimation
-                                    end
-                                    
-                                    moviename=[Constants.imagedir VidDirList(fn).name]; rect=RightChoiceSquare;
-                                    PlayMovie
-                                    finished=1;
-                                    trialScore(trial)=1;
-                                elseif(Constants.LRvisible == 0)
-                                    playFixAnimation
-                                    Screen('DrawTexture', EXPWIN, blockTex_Incorrect, bRect_Incorrect, RightChoiceSquare);
-                                    %display incorrect X
-                                    finished=1;
-                                    Screen(EXPWIN,'Flip');
-                                    WaitSecs(Constants.IncorrectTimeOut);
-                                end
+                    end
+                    %LOOKING AT RIGHT SIDE AOI
+                elseif(EyeInsideLR(end,1)==0 & EyeInsideLR(end,2)==1)
+                    if(Constants.LRvisible ~= 1); %1=left only visible
+                        if(sum(EyeInsideLR(end-Constants.FixThresh:end,2))>=Constants.FixThresh)
+                            %evaluate if we are correct
+                            if(CorrectLocation(trial)==Constants.RIGHT)
+                                moviename=[Constants.imagedir VidDirList(fn).name]; rect=RightChoiceSquare;
+                                PlayMovie
+                                finished=1;
+                                trialScore(trial)=1;
+                            elseif(Constants.LRvisible == 0)
+                                Screen('DrawTexture', EXPWIN, blockTex_Incorrect, bRect_Incorrect, RightChoiceSquare);
+                                %display incorrect X
+                                finished=1;
+                                Screen(EXPWIN,'Flip');
+                                WaitSecs(Constants.IncorrectTimeOut);
                             end
                         end
                     end
                 end
-                
-                if(Constants.showGaze & ~finished)
-                    drawGazeCursorNoPoll_EXP
-                end
-                
-                ScreenTime(end+1)=Screen(EXPWIN,'Flip');
-                time_now=GetSecs-t1;
-            else
-                time_now=GetSecs-t1;
-                ScreenTime(end+1)=Screen(EXPWIN,'Flip');
             end
+            
+            if(Constants.showGaze & ~finished)
+                drawGazeCursorNoPoll_EXP
+            end
+            
+            ScreenTime(end+1)=Screen(EXPWIN,'Flip');
+            time_now=GetSecs-t1;
         else
             time_now=GetSecs-t1;
             ScreenTime(end+1)=Screen(EXPWIN,'Flip');
@@ -177,12 +168,6 @@ while(training)
         if( (finished == 0) & time_now>Constants.trialTime)
             finished=1;
             DrawTimeOutMask;
-            %if(Constants.LRvisible ~= 2); %2=right only visible
-            %    Screen('DrawTexture', EXPWIN, blockTex_Incorrect, bRect_Incorrect, LeftChoiceSquare);
-            %else
-            %    Screen('DrawTexture', EXPWIN, blockTex_Incorrect, bRect_Incorrect, RightChoiceSquare);
-            %end
-            %display incorrect X
             
             Screen(EXPWIN,'Flip');
             WaitSecs(Constants.IncorrectTimeOut);
@@ -213,6 +198,7 @@ while(training)
         
     end
     
+    
     %wait ISI
     Screen('FillRect',EXPWIN,GREY);
     Screen(EXPWIN,'Flip');
@@ -231,27 +217,22 @@ while(training)
     ISI
     WaitSecs(ISI);
     
+    lxy=[left_xy_PRE; left_xy ];
+    rxy=[right_xy_PRE; right_xy];
+    lp=[left_pupil_PRE; left_pupil];
+    rp=[right_pupil_PRE; right_pupil];
+    lv=[left_validity_PRE; left_validity];
+    rv=[right_validity_PRE; right_validity];
+    eTime=[EyeTime_PRE'; EyeTime'];
+    eAOI=[EyeInsideLR_PRE; EyeInsideLR];
     
-    if(Constants.trackEyes)
-        lxy=[left_xy_PRE; left_xy ];
-        rxy=[right_xy_PRE; right_xy];
-        lp=[left_pupil_PRE; left_pupil];
-        rp=[right_pupil_PRE; right_pupil];
-        lv=[left_validity_PRE; left_validity];
-        rv=[right_validity_PRE; right_validity];
-        eTime=[EyeTime_PRE'; EyeTime'];
-        eAOI=[EyeInsideLR_PRE; EyeInsideLR];
-        
-        EyeData(trial).leye_xypv=[lxy lp lv];
-        EyeData(trial).reye_xypv=[rxy rp rv];
-        EyeData(trial).AOI=eAOI;
-        EyeData(trial).time=eTime;
-        
-        TrialData(trial).AudioPlayTime=AudioPlayTime;
-        TrialData(trial).VisStimAppearTime=VisStimAppearTime;
-        
-        
-    end
+    EyeData(trial).leye_xypv=[lxy lp lv];
+    EyeData(trial).reye_xypv=[rxy rp rv];
+    EyeData(trial).AOI=eAOI;
+    EyeData(trial).time=eTime;
+    
+    TrialData(trial).AudioPlayTime=AudioPlayTime;
+    TrialData(trial).VisStimAppearTime=VisStimAppearTime;
     
     
     %reset & add more trials
@@ -278,8 +259,8 @@ while(training)
             'EyeErrorTestStart','Constants','EyeData','TrialData')
     end
     
+    
 end %training & trial +1
-
 
 
 %clean up & save data
@@ -289,8 +270,6 @@ Screen('FillRect',EXPWIN,GREY);
 
 Screen(EXPWIN,'Flip');
 WaitSecs(2);
-
-
 
 % Stop playback:
 PsychPortAudio('Stop', pahandle);

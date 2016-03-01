@@ -1,5 +1,5 @@
 function [calibPlotData] = Calibrate_infant(Calib,morder,iter,donts,Constants)
-global EXPWIN
+global EXPWIN GREY
 
 %CALIBRATE calibrate the eye tracker
 %   This function is used to set and view the calibration results for the tobii eye tracker. 
@@ -43,7 +43,7 @@ global EXPWIN
         movieHeightReduced = Constants.calpoint_size;  %movieHeight*0.5;
         
         
-        Screen('FillRect',EXPWIN,Calib.bkcolor*255);
+        Screen('FillRect',EXPWIN,Calib.bkcolor);
         Screen(EXPWIN, 'Flip');
         
         if iter == 1
@@ -61,7 +61,7 @@ global EXPWIN
         end
 
         pause(1);
-        Screen('FillRect',EXPWIN,[0 0 0]);
+        Screen('FillRect',EXPWIN,Calib.bkcolor);
         tic;
         %Open movie
         movie = 0;
@@ -112,7 +112,7 @@ global EXPWIN
 
         end
  
-        Screen('FillRect',EXPWIN,Calib.bkcolor*255);
+        Screen('FillRect',EXPWIN,Calib.bkcolor);
         Screen(EXPWIN, 'Flip');
 
         close 

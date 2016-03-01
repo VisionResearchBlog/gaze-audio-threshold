@@ -1,6 +1,6 @@
 function Calib = SetCalibParams(screenNumber, SKIP_SYNC)
 
-global EXPWIN
+global EXPWIN GREY
 
 if(SKIP_SYNC)
     Screen('Preference', 'SkipSyncTests', 1);
@@ -36,9 +36,9 @@ Calib.screen.pixperdeg = mean(pixperdeg);
 Calib.points.x = [0.1 0.9 0.5 0.9 0.1];  % X coordinates in [0,1] coordinate system
 Calib.points.y = [0.1 0.1 0.5 0.9 0.9];  % Y coordinates in [0,1] coordinate system
 Calib.points.n = size(Calib.points.x, 2); % Number of calibration points
-Calib.bkcolor = [0.3 0.3 0.3]; % background color used in calibration process
+Calib.bkcolor = GREY; % background color used in calibration process
 Calib.fgcolor = [0 0 1]; % (Foreground) color used in calibration process
-Calib.fgcolor2 = [1 0 0]; % Color used in calibratino process when a second foreground color is used (Calibration dot)
+Calib.fgcolor2 = [1 0 0]; % Color used in calibration process when a second foreground color is used (Calibration dot)
 
 Calib.BigMark = 65; % the big marker
 Calib.TrackStat = 25; %

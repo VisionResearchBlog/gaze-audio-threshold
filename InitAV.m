@@ -20,6 +20,17 @@ imdata(:,:,4)=alpha;
 blockTex=Screen('MakeTexture', EXPWIN, imdata);
 bRect=Screen('Rect', blockTex);
 
+myimgfile=[fname '_RIGHT.tif'];
+imdata = imread([Constants.imagedir myimgfile]);
+blockTex_RIGHT=Screen('MakeTexture', EXPWIN, imdata);
+bRect_RIGHT=Screen('Rect', blockTex);
+
+myimgfile=[fname '_LEFT.tif'];
+imdata =imread([Constants.imagedir myimgfile]);
+blockTex_LEFT=Screen('MakeTexture', EXPWIN, imdata);
+bRect_LEFT=Screen('Rect', blockTex);
+
+
 %we have nothing on screen, so flip again to have an interval to get initial
 %eye tracking data
 ScreenTime(end+1)=Screen(EXPWIN,'Flip');
@@ -57,9 +68,7 @@ end
 finished=0;
 
 %flush eye buffer before starting new recordings
-if(Constants.trackEyes)
-    tetio_readGazeData;
-end
+tetio_readGazeData;
 
 t1=GetSecs; %use last flip instead?
 EyeInsideLR=[];

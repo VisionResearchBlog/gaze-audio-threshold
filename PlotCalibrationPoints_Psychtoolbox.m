@@ -8,7 +8,7 @@ function [pts, TrackError] = PlotCalibrationPoints_Psychtoolbox(calibPlot, mOrde
 %   Output:
 %         pts: The list of points used for calibration. These could be
 %         further used for the analysis such as the variance, mean etc.
-global EXPWIN BLACK 
+global EXPWIN BLACK GREY 
 
 Lx_delta=[]; Ly_delta=[]; Rx_delta=[]; 
 Ry_delta=[]; Rxy_dist =[]; Lxy_dist=[];
@@ -50,7 +50,7 @@ end
 
 
 
-Screen('FillRect',EXPWIN,Calib.bkcolor*255);
+Screen('FillRect',EXPWIN,Calib.bkcolor);
 
 for i = 1:length(lp)
     dotLoc(1) = Calib.screen.width*pts(i).origs(1) - (Calib.SmallMark);
