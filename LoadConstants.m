@@ -7,7 +7,7 @@ eyetrackerhost = 'TX300-010102211502.local.' %brian's tracker
 %eyetrackerhost = 'TX300-010105528621.local.' %ellie's tracker
 
 Constants.FixThresh=30; %30*16.67=500ms @ 60hz samples Fixation Duration Movie Target
-Constants.trialTime=4; %trial timeout - 4 seconds
+Constants.trialTime=5; %trial timeout - 4 seconds
 
 Constants.ISI_RATE=0.5; %interstimulus interval maximum
 Constants.ISI_MAX=3; %interstimulus interval maximum

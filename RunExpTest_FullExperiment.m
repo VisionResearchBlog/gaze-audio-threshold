@@ -105,10 +105,10 @@ while(training)
                                 finished=1;
                                 trialScore(trial)=1;
                             else
-                                if(animate_fix)
-                                    playFixAnimation
-                                    animate_fix=0;
-                                end
+                                %if(animate_fix)
+                                %    playFixAnimation
+                                %    animate_fix=0;
+                                %end
                                 Screen('DrawTexture', EXPWIN, ...
                                     blockTex_Incorrect, ...
                                     bRect_Incorrect, LeftChoiceSquare);
@@ -134,10 +134,10 @@ while(training)
                                 finished=1;
                                 trialScore(trial)=1;
                             else
-                                if(animate_fix)
-                                    playFixAnimation
-                                    animate_fix=0;
-                                end
+                                %if(animate_fix)
+                                %    playFixAnimation
+                                %    animate_fix=0;
+                                %end
                                 Screen('DrawTexture', EXPWIN, blockTex_Incorrect, ...
                                     bRect_Incorrect, RightChoiceSquare);
                                 %display incorrect X

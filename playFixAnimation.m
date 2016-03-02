@@ -19,10 +19,12 @@ else
     if(EyeInsideLR(end,1)==1 & EyeInsideLR(end,2)==0)
         xd=mean(FixationSquare([1 3]))-mean(LeftChoiceSquare([1 3]));
         yd=mean(FixationSquare([2 4]))-mean(LeftChoiceSquare([2 4]));
+        ANIM_blockTex=blockTex_LEFT;
         %LOOKING AT RIGHT SIDE AOI
     elseif(EyeInsideLR(end,1)==0 & EyeInsideLR(end,2)==1)
         xd=mean(FixationSquare([1 3]))-mean(RightChoiceSquare([1 3]));
         yd=mean(FixationSquare([2 4]))-mean(RightChoiceSquare([2 4]));
+        ANIM_blockTex=blockTex_RIGHT;
     end
 end
 %lets animate in 1 sec
