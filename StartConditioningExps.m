@@ -25,7 +25,11 @@ Constants.StimulusAssignment=Constants.HiLeft_LoRight;
 Constants.AudioStimulusHeldConstant=Constants.HIGH; % for PITCH - it MUST be this one - HIGH held constant so that the difficult trials are at the end and not at the start.
 
 %load movie to keep attention
-%attnObj=VideoReader([pwd '\STIMULI\VISUAL\' 'Pocoyo 3x00 El Show de Pocoyo.mov']);
+try
+    attnObj=VideoReader([pwd '\STIMULI\VISUAL\' 'Pocoyo 3x00 El Show de Pocoyo.mov']);
+    catch ME
+    ME;
+end
 %%%----------- Edit Here to select which part of experiment you want to run
 
 HideCursor

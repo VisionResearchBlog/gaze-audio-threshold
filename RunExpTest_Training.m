@@ -75,6 +75,7 @@ while(training)
     moviename=[Constants.imagedir 'listen_' Constants.fixpoint_img '.mp4'];
     rect=FixationSquare;
     PlayMovieBegin;
+
     
     while(~finished)
         
@@ -262,9 +263,6 @@ while(training)
     
 end %training & trial +1
 
-
-%clean up & save data
-ShowCursor
 
 Screen('FillRect',EXPWIN,GREY);
 

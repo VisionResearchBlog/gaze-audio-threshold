@@ -1,8 +1,8 @@
 Screen('FillRect', EXPWIN, GREY);
 anim_t_length=60;
 
-%if(Constants.LRvisible ~= 1); %1=left
-if(1) %Constants.TrainingTrials)
+
+if(Constants.TrainingTrials)
     if(CorrectLocation(trial)==Constants.RIGHT)
         %creat path
         xd=mean(FixationSquare([1 3]))-mean(RightChoiceSquare([1 3]));

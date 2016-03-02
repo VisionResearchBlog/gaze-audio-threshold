@@ -8,7 +8,9 @@ function [pts, TrackError] = PlotCalibrationPoints_Psychtoolbox(calibPlot, mOrde
 %   Output:
 %         pts: The list of points used for calibration. These could be
 %         further used for the analysis such as the variance, mean etc.
-global EXPWIN BLACK GREY 
+global EXPWIN  
+
+BLACK=[0 0 0];
 
 Lx_delta=[]; Ly_delta=[]; Rx_delta=[]; 
 Ry_delta=[]; Rxy_dist =[]; Lxy_dist=[];

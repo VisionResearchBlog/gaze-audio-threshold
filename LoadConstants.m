@@ -73,7 +73,7 @@ Constants.gColor=[255 150 0 255]; %gaze cursor colour
 %---------
 Constants.fpXY=120; %fixation image XY size in pixels
 Constants.sXY=[300 240]; %movie stimulus size
-GREY=[220 220 220] %125 125 125]; yes grey is white!
+GREY=[220 220 220]; 
 
 
 %we use convention that locations of left & right have 0 & 1 assigned

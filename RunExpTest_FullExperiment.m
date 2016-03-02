@@ -279,9 +279,6 @@ if(~ESC_PRESSED)
     
 end
 
-%clean up & save data
-ShowCursor
-
 Screen('CloseAll')
 
 
