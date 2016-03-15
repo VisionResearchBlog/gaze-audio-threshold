@@ -20,7 +20,9 @@ end
 while(training)
     
     trial=trial+1;
-    animate_fix=1;
+    
+    animate_fix=0;
+    %animate_fix=1; % if we want each trial
     
     PsychPortAudio('UseSchedule', pahandle, 1);
     %we need to determine the appropriate sound to play for this trial
@@ -46,9 +48,10 @@ while(training)
     
     VisStimInit=0;
     
-    moviename=[Constants.imagedir 'listen_' Constants.fixpoint_img '.mp4'];
-    rect=FixationSquare;
-    PlayMovieBegin;
+    %No listening during real experiment
+    %moviename=[Constants.imagedir 'listen_' Constants.fixpoint_img '.mp4'];
+    %rect=FixationSquare;
+    %PlayMovieBegin;
     
     while(~finished)
         
@@ -96,7 +99,8 @@ while(training)
                             %evaluate if we are correct
                             if(CorrectLocation(trial)==Constants.LEFT)
                                 if(animate_fix)
-                                    playFixAnimation
+                                    %playFixAnimation
+                                    playFlashAnimation
                                     animate_fix=0;
                                 end
                                 moviename=[Constants.imagedir VidDirList(fn).name];
@@ -126,7 +130,8 @@ while(training)
                             %evaluate if we are correct
                             if(CorrectLocation(trial)==Constants.RIGHT)
                                 if(animate_fix)
-                                    playFixAnimation
+                                    %playFixAnimation
+                                    playFlashAnimation
                                     animate_fix=0;
                                 end
                                 moviename=[Constants.imagedir VidDirList(fn).name]; rect=RightChoiceSquare;
@@ -134,10 +139,11 @@ while(training)
                                 finished=1;
                                 trialScore(trial)=1;
                             else
-                                %if(animate_fix)
-                                %    playFixAnimation
-                                %    animate_fix=0;
-                                %end
+                                if(animate_fix)
+                                    %playFixAnimation
+                                    playFlashAnimation
+                                    animate_fix=0;
+                                end
                                 Screen('DrawTexture', EXPWIN, blockTex_Incorrect, ...
                                     bRect_Incorrect, RightChoiceSquare);
                                 %display incorrect X

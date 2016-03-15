@@ -1,10 +1,10 @@
 global EXPWIN GREY Calib
-MONITOR=1; %set to zero for running exp
-SKIP_SYNC=1; %Should be set to 0 when running exp, 1 for programming
+MONITOR=0; %set to zero for running exp
+SKIP_SYNC=0; %Should be set to 0 when running exp, 1 for programming
 DEBUG=0; %turn  to 1 if already have calibrated eye
 
-eyetrackerhost = 'TX300-010102211502.local.' %brian's tracker
-%eyetrackerhost = 'TX300-010105528621.local.' %ellie's tracker
+%eyetrackerhost = 'TX300-010102211502.local.' %brian's tracker
+eyetrackerhost = 'TX300-010105528621.local.' %ellie's tracker
 
 Constants.FixThresh=30; %30*16.67=500ms @ 60hz samples Fixation Duration Movie Target
 Constants.trialTime=5; %trial timeout - 4 seconds
@@ -26,8 +26,8 @@ Constants.MinimumPerformanceTrialNum=6; %how many trials at bottom before we sto
 Constants.MaxReversals=11; %how many reversals before stopping testing
 
 Constants.TrainingTrials=1; %if it is training
-Constants.AnimatedTrials=3; %how many trials at beginning need animated fixaiton point
-Constants.animate_fix=1;
+%Constants.AnimatedTrials=0; %how many trials at beginning need animated fixaiton point
+%Constants.animate_fix=0; %slide character across screen to choice?
 
 Constants.IncorrectTimeOut=1.5;
 Constants.ShakeFixThresh=120; %when to start attention grabber 120frames = 2s

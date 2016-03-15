@@ -20,14 +20,14 @@ end
 
 
 if(Constants.LRvisible==0) %real trial
-    choiceColors(:,1)=[ 120 20 220 255];
-    choiceColors(:,2)=[ 120 20 220 255];
+    choiceColors(:,1)=[ 20 20 150 255];
+    choiceColors(:,2)=[ 150 20 20 255];
 elseif(Constants.LRvisible==1) %only LEFT VISIBLE
-    choiceColors(:,1)=[ 120 20 220 255];
+    choiceColors(:,1)=[ 20 20 150 255];
     choiceColors(:,2)=[ GREY 255];
 elseif(Constants.LRvisible==2) %only RIGHT visible
     choiceColors(:,1)=[ GREY 255];
-    choiceColors(:,2)=[ 120 20 220 255];
+    choiceColors(:,2)=[ 150 20 20 255];
 end
 
 

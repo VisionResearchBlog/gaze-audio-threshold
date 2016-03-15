@@ -67,6 +67,7 @@ end
 
 if(~ESC_PRESSED)
     %%%---Training Parts 3-----
+    Constants.TrainingTrials=0;
     Constants.TrainHiLo=3; %0=normal, 1=Hi, 2=Low, 3=Hi&Lo
     Constants.savefile=[expdir 'data\' savename '.' num2str(GetSecs) '.Train3.data.mat'];
     Constants.numTrialEval=6; %for training how Smany trials to evaluate over
@@ -77,7 +78,7 @@ end
 if(~ESC_PRESSED)
     %%%---- FULL EXPERIMENT ----
     Constants.savefile=[expdir 'data\' savename '.' num2str(GetSecs) '.FullExp.data.mat'];
-    Constants.TrainingTrials=0; %no training
+    %no training
     RunExpTest_FullExperiment
 end
 

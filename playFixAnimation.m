@@ -1,3 +1,5 @@
+%move the character so it looks like they slide across screen
+
 Screen('FillRect', EXPWIN, GREY);
 anim_t_length=60;
 

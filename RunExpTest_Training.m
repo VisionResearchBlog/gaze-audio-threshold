@@ -4,6 +4,7 @@ InitExp;
 
 ISI=Constants.ISI_INIT;
 
+clear tmp
 %in training limit the stimuli
 if(Constants.TrainHiLo==1) %high training
     wavfilenames=wavfilenames(end);
@@ -47,7 +48,12 @@ end
 while(training)
     
     trial=trial+1;
-    animate_fix=1;
+
+    if(Constants.TrainingTrials)
+        animate_fix=1; % if we want each trial
+    else
+        animate_fix=0;
+    end
     
     s = PsychPortAudio('GetStatus', pahandle);
     
@@ -105,7 +111,10 @@ while(training)
                 left_validityTMP right_validityTMP];
             
             if(animate_fix)
-                playFixAnimation
+                %playFixAnimation %character slides
+                playFlashAnimation %character slides
+                
+                %make the target flash
                 animate_fix=0;
             end
             
