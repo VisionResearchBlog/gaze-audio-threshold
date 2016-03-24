@@ -35,8 +35,8 @@ end
 HideCursor
 
 %%%---Training Parts 1A----- Part one alternates Left & Right
-Constants.numTrialEval=3; %for training how many trials to evaluate over
-Constants.numTrialCorrect=3; % what number correct are needed?
+Constants.numTrialEval=2; %for training how many trials to evaluate over
+Constants.numTrialCorrect=2; % what number correct are needed?
 
 Constants.LRvisible=0; %1=left, 2=right (the target is visible)
 Constants.TrainHiLo=1; %1=Hi, 2=Low

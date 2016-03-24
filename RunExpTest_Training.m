@@ -48,7 +48,7 @@ end
 while(training)
     
     trial=trial+1;
-
+    
     if(Constants.TrainingTrials)
         animate_fix=1; % if we want each trial
     else
@@ -78,10 +78,11 @@ while(training)
     
     drawQuestionMark;
     
-    moviename=[Constants.imagedir 'listen_' Constants.fixpoint_img '.mp4'];
-    rect=FixationSquare;
-    PlayMovieBegin;
-
+    if(Constants.TrainingTrials)
+        moviename=[Constants.imagedir 'listen_' Constants.fixpoint_img '.mp4'];
+        rect=FixationSquare;
+        PlayMovieBegin;
+    end
     
     while(~finished)
         
