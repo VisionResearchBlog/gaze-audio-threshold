@@ -24,6 +24,12 @@ closing matlab itself, also remeber the command ‘sca’ will close rogue psychtool
 screens (the tend to persist).
 **
 
+**Data Files & Analysis**
+Please see data directory (be sure to create one before 1st run in the main experiment
+code directory else matlab will give an error since it can’t save) for files.
+See the analysis directory for code examples to generate graphs of the data as seen
+in the paper
+**
 
 StartConditioningExps.m is used to run the experiment, and along with
 LoadConstants.m, SetCalibParams.m they form the 3 main files to edit for various 

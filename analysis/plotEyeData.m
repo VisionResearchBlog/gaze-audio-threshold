@@ -3,7 +3,6 @@ if(exist('EyeErrorTestEnd'))
     figure(1); clf; hold on;
     
     for w=1:size(EyeErrorTestEnd,2)
-        
         %     subplot(1,2,1); hold on;
         %     a=zeros(length(EyeErrorTestStart(w).Left),1)+w;
         %     plot(a+0.1,EyeErrorTestStart(w).Left,'g*')
@@ -15,18 +14,22 @@ if(exist('EyeErrorTestEnd'))
         %     plot( a, median(EyeErrorTestStart(w).Right), 'k*')
         
         %    subplot(1,2,2); hold on;
-        a=zeros(length(EyeErrorTestEnd(w).Left),1)+w;
-        plot(a+0.1,EyeErrorTestEnd(w).Left,'g*')
-        plot(a,EyeErrorTestEnd(w).Right,'b*')
-        scatter( a(1)+0.1, median(EyeErrorTestEnd(w).Left),75,'r','filled')
-        scatter( a(1), median(EyeErrorTestEnd(w).Right),75, 'r','filled')
         
+        idx=EyeErrorTestEnd(w).Left_Validity<2;
+        a=zeros(length(EyeErrorTestEnd(w).Left(idx)),1)+w;
+        plot(a+0.1,EyeErrorTestEnd(w).Left(idx),'g*')
+        scatter( a(1)+0.1, median(EyeErrorTestEnd(w).Left(idx)),75,'r','filled')
+        
+        idx=EyeErrorTestEnd(w).Right_Validity<2;        
+        a=zeros(length(EyeErrorTestEnd(w).Right(idx)),1)+w;
+        plot(a,EyeErrorTestEnd(w).Right(idx),'b*')
+        scatter( a(1), median(EyeErrorTestEnd(w).Right(idx)),75, 'r','filled')
     end
     
     xlim([0 6])
-    ylim([0 10])
+    %ylim([0 10])
     xlabel('Calibration Points'); ylabel('Degrees of Error')
-    legend('Left Eye', 'Right Eye','Median')
+    legend('Left Eye','Median', 'Right Eye')
     %text(0.1,2, 'End')
     title(['Final Calibration Validation: ' file_list(j).name])
 end

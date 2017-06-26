@@ -1,11 +1,11 @@
 clear all
 current_dir=pwd;
-data_dir=[current_dir(1:end-8) 'data\'];
+data_dir=[current_dir(1:end-8) 'data/'];
 file_list=dir([data_dir '*FullExp*']);
 
 %If you have one file to view & don't want to run each file in the data directory, 
-%enter the name like this:
-file_list(1).name='el9feb_pit_elec.2097.2777.FullExp.data.mat'
+%comment out line #4 and uncomment #8 and then enter the name like this:
+%file_list.name='c4_rhyhumandino.6170.8393.FullExp.data.mat'
 
 for j=1:length(file_list)
     load([data_dir file_list(j).name])
@@ -43,8 +43,7 @@ for j=1:length(file_list)
     if(j==length(file_list))
         disp('Last participant...done')
     else
-        keyboard
-        %h=input('Press Return to plot next...');
+        h=input('Press Return to plot next...');
     end
     
 end
