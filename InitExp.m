@@ -48,17 +48,19 @@ RightChoiceSquare=[3*(Calib.screen.width/4)-Constants.sXY(1)/2, ...
 
 
 
-if(DEBUG)
-    try
-        tetio_stopTracking;
-    end
-    tetio_startTracking;
-    
-else
-    Tobii_calibration_with_psychtoolbox;
-    tetio_startTracking;
-    mOrder = randperm(Calib.points.n);
-    EyeErrorTestStart=TestEyeTrackerError(Calib,mOrder,Constants);
+if(Constants.UseEyeTracker)
+	if(DEBUG)
+		try
+			tetio_stopTracking;
+		end
+		tetio_startTracking;
+		
+	else
+		Tobii_calibration_with_psychtoolbox;
+		tetio_startTracking;
+		mOrder = randperm(Calib.points.n);
+		EyeErrorTestStart=TestEyeTrackerError(Calib,mOrder,Constants);
+	end
 end
 
 

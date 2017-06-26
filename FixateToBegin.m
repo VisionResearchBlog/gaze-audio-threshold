@@ -38,6 +38,7 @@ while (fixateToStart) % wait for press
                 fixateToStart=0; % if yes - keep waiting for fix, if no - continute to audio.
             else
                 if(size(EyeInsideLR_PRE,1)>Constants.ShakeFixThresh)
+                    %will shake +/-2 degress at scale of 0.05
                     x_offset=sin(length(ScreenTime)*0.1)*Calib.screen.pixperdeg*.05;
                     OffsetFixationSquare(1)=OffsetFixationSquare(1)+x_offset;
                     OffsetFixationSquare(3)=OffsetFixationSquare(3)+x_offset;

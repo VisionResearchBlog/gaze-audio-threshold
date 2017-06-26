@@ -1,3 +1,25 @@
+# gaze-audio-threshold
+Experimental Gaze-contingent software for estimating auditory detection and discrimination thresholds
+
+This is part of research funded by EU's Marie Curie Initiative LanPercept
+https://www.ntnu.edu/lanpercept
+
+Please consult ReadMe.txt for use instructions. 
+StartConditioningExps.m is used to run the experiment, and along with
+LoadConstants.m, SetCalibParams.m they form the 3 main files to edit for various 
+parameters, paths, and setting up conditions.
+
+Read those files and their comments and the options for setting up the monitor, 
+eye tracking, choosing stimuli, and setting up number of conditions etc should be clear.
+
+
+The code contained here is available for research purposes only and is described in more detail via
+(Sullivan,Wilson, and Saldana, submitted 2017)
+
+Copyright Wilson & Sullivan 2016, (Seville, Spain / Stockholm, Sweden)
+ÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+
+
 Keyboard Commands:
 
 You can exit the program by holding down the escape key 'ESC'. Depending
@@ -17,21 +39,21 @@ To play an attention movie use 'p' to play and 's' to stop
 
 Here are some notes on the data files, the variables each file has consist of:
 
-Calib – info on eye tracker & viewing screen
+Calib - info on eye tracker & viewing screen
 
-Constants – experimental constants
+Constants - experimental constants
 
-CorrectLocation – Which side is the correct side per trial (0 left, 1 right)
+CorrectLocation - Which side is the correct side per trial (0 left, 1 right)
 
-EyeData – eye info struct containts
+EyeData - eye info struct containts
 	    leye_xypv  - left eye x,y, pupil, validity code
-    reye_xypv – right eye “   “
-    AOI – AOI detection, column 1=left, 2=right, 3=fixation point, rows=eye tracking frames
-    Time – time in seconds for each eye data frame
+    reye_xypv - right eye “   “
+    AOI - AOI detection, column 1=left, 2=right, 3=fixation point, rows=eye tracking frames
+    Time - time in seconds for each eye data frame
             
 EyeErrorTestStart : struct containing fairly obvious contents
-    Left – x,y
-    Right – x,y
+    Left - x,y
+    Right - x,y
     Left_TrackLoss
     Right_TrackLoss
     Left_Validity
@@ -40,24 +62,26 @@ EyeErrorTestStart : struct containing fairly obvious contents
     Right_pupil
 
 TrialData          (contains stimulus timing info, in seconds, same clock as EyeData.time)
-   AudioPlayTime – when did the sound start playing?
-    VisStimAppearTime – when did the Left & right boxes appear
+   AudioPlayTime - when did the sound start playing?
+    VisStimAppearTime - when did the Left & right boxes appear
 
 trialScore         - was the subject right (1) or wrong (0)
 
 Note the above applies to Training trials 1 & 2, Trial 3 also has:
 
-AudioStimList – which audio stimulus was played, either 0=low or 1=high,  in this case you can think of low & high referencing the number
-In the audio file name as they are sound1.wav to sound11.wav, so low means low number & high means high number.  Note in the full experiment
+AudioStimList - which audio stimulus was played, either 0=low or 1=high,  
+in this case you can think of low & high referencing the number
+In the audio file name as they are sound1.wav to sound11.wav, so low means
+low number & high means high number.  Note in the full experiment
 We also have step size info…(see below)
 
 In the FullExp we have:
 
-EyeErrorTestEnd – same format as error test begin
+EyeErrorTestEnd - same format as error test begin
 
 PerfCode = Code describing why the experiment was brought to an end
-1, max performance, 2 minimum performance, 3 – exceeded maximum number of reversals
+1, max performance, 2 minimum performance, 3 - exceeded maximum number of reversals
 
-ReversalCount – how many reversals did they have
+ReversalCount - how many reversals did they have
 
-StepStimulus – at what level was the non-static stimulus per trial?
+StepStimulus - at what level was the non-static stimulus per trial?

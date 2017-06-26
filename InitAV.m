@@ -4,11 +4,11 @@ ScreenTime=[];
 fn=randi(length(VidDirList));
 
 if( strcmp(VidDirList(fn).name(1),'s') )
-    fname='snail';
+	fname='snail';
 elseif( strcmp(VidDirList(fn).name(1),'d') )
-    fname='dino';
+	fname='dino';
 elseif( strcmp(VidDirList(fn).name(1),'a') )
-    fname='alien';
+	fname='alien';
 end
 
 %fname='house' % overwrite as we are using a new icon - uncomment if using
@@ -42,7 +42,9 @@ Screen('DrawTexture', EXPWIN, blockTex, bRect, FixationSquare);
 ScreenTime(end+1)=Screen(EXPWIN,'Flip');
 
 %audio won´t begin until fixationfor constant.fixThresh
-FixateToBegin
+if(Constants.UseEyeTracker)
+	FixateToBegin
+end
 
 AudioPlayTime=PsychPortAudio('Start', pahandle, [], 0, 1);
 
@@ -53,22 +55,24 @@ Screen('DrawTexture', EXPWIN, blockTex, bRect, FixationSquare);
 ScreenTime(end+1)=Screen(EXPWIN,'Flip');
 
 while (s.Active) % wait for press
-    s = PsychPortAudio('GetStatus', pahandle);
-    %disp('wait for end of sound')
-    Screen('FillRect',EXPWIN,GREY);
-    Screen('DrawTexture', EXPWIN, blockTex, bRect, FixationSquare);
-    
-    if(Constants.showGaze)
-        drawGazeCursor
-    end
-    ScreenTime(end+1)=Screen(EXPWIN,'Flip');
+	s = PsychPortAudio('GetStatus', pahandle);
+	%disp('wait for end of sound')
+	Screen('FillRect',EXPWIN,GREY);
+	Screen('DrawTexture', EXPWIN, blockTex, bRect, FixationSquare);
+	
+	if(Constants.showGaze & Constants.UseEyeTracker)
+		drawGazeCursor
+	end
+	ScreenTime(end+1)=Screen(EXPWIN,'Flip');
 end
 
 %SETUP & RESET FLAGS for individual trials
 finished=0;
 
-%flush eye buffer before starting new recordings
-tetio_readGazeData;
+if(Constants.UseEyeTracker)
+	%flush eye buffer before starting new recordings
+	tetio_readGazeData;
+end
 
 t1=GetSecs; %use last flip instead?
 EyeInsideLR=[];

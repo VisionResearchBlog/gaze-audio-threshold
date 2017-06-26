@@ -1,10 +1,16 @@
 # gaze-audio-threshold
 Experimental Gaze-contingent software for estimating auditory detection and discrimination thresholds
-This is part of ongoing research funded by EU's Marie Curie Initiative LanPercept
+
+This is part of research funded by EU's Marie Curie Initiative LanPercept
 https://www.ntnu.edu/lanpercept
 
+Please consult ReadMe.txt for use instructions. 
+StartConditioningExps.m is used to run the experiment, and along with
+LoadContants.m, SetCalibParams.m they form the 3 main files to edit for various 
+parameters, paths, and setting up conditions.
+
 The code contained here is available for research purposes only and is described in more detail via
-(Wilson, Sullivan, Saldana in Preparation, 2017)
+(Sullivan,Wilson, and Saldana, submitted 2017)
 
 Copyright Wilson & Sullivan 2016, (Seville, Spain / Stockholm, Sweden)
 

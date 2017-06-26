@@ -1,13 +1,14 @@
 global EXPWIN GREY Calib
-MONITOR=0; %set to zero for running exp
-SKIP_SYNC=0; %Should be set to 0 when running exp, 1 for programming
-DEBUG=0; %turn  to 1 if already have calibrated eye
+MONITOR=1; %set to zero for running exp
+SKIP_SYNC=1; %Should be set to 0 when running exp, 1 for programming - ie if you have 2 screens on
+DEBUG=0; %turn  to 1 if already have calibrated eye track
 
 %eyetrackerhost = 'TX300-010102211502.local.' %brian's tracker
-eyetrackerhost = 'TX300-010105528621.local.' %ellie's tracker
+eyetrackerhost = 'TX300-010105528621.local.'; %ellie's tracker
+Constants.UseEyeTracker=0;
 
-Constants.FixThresh=30; %30*16.67=500ms @ 60hz samples Fixation Duration Movie Target
-Constants.trialTime=5; %trial timeout - 4 seconds
+Constants.FixThresh=20; %20*16.67=333ms?? @ 60hz samples Fixation Duration Movie Target
+Constants.trialTime=6; %trial timeout - 6 seconds
 
 Constants.ISI_RATE=0.5; %interstimulus interval maximum
 Constants.ISI_MAX=3; %interstimulus interval maximum
@@ -42,28 +43,27 @@ ESC_PRESSED=0;
 %--don't below alter unless you have good reason--
 Constants.showGaze=1; %O=Nogaze pointer visible 1=gaze pointer visible
 
+expdir=[pwd '/'];
+PITCH_HUMAN=[expdir '/STIMULI/AUDIO/pitch human/'];
+PITCH_ELEC=[expdir '/STIMULI/AUDIO/pitch elec/'];
+RHYTHM_ELEC=[expdir '/STIMULI/AUDIO/rhythm elec/'];
+RHYTHM_HUMAN=[expdir '/STIMULI/AUDIO/rhythm human/'];
 
-expdir=[pwd '\'];
-PITCH_HUMAN=[expdir '\STIMULI\AUDIO\pitch human\'];
-PITCH_ELEC=[expdir '\STIMULI\AUDIO\pitch elec\'];
-RHYTHM_ELEC=[expdir '\STIMULI\AUDIO\rhythm elec\'];
-RHYTHM_HUMAN=[expdir '\STIMULI\AUDIO\rhythm human\'];
 
+VOLUME=[expdir '/STIMULI/AUDIO/volume/'];
 
-VOLUME=[expdir '\STIMULI\AUDIO\volume\'];
-
-REWARD_DIRECTORY=[expdir '\STIMULI\VISUAL\rewards\'];
-%Rwd_Img1='cauldron.tif'; Rwd_Img2='coins.tif';
+REWARD_DIRECTORY=[expdir '/STIMULI/VISUAL/rewards/'];
+Rwd_Img1='cauldron.tif'; Rwd_Img2='coins.tif';
 %Rwd_Img1='jelly bean jar.tif'; Rwd_Img2='jelly beans.tif';
-Rwd_Img1='star box.tif'; Rwd_Img2='star.tif';
+%Rwd_Img1='star box.tif'; Rwd_Img2='star.tif';
 
 
-ALIEN_DIRECTORY=[expdir '\STIMULI\VISUAL\Aliens\'];
-DINO_DIRECTORY=[expdir '\STIMULI\VISUAL\Dinos\'];
-SNAIL_DIRECTORY=[expdir '\STIMULI\VISUAL\Snails\'];
-COMBO_DIRECTORY=[expdir '\STIMULI\VISUAL\Combined\'];
+ALIEN_DIRECTORY=[expdir '/STIMULI/VISUAL/Aliens/'];
+DINO_DIRECTORY=[expdir '/STIMULI/VISUAL/Dinos/'];
+SNAIL_DIRECTORY=[expdir '/STIMULI/VISUAL/Snails/'];
+COMBO_DIRECTORY=[expdir '/STIMULI/VISUAL/Combined/'];
 
-Constants.calpoint_dir=[expdir '\InfantCalibration\'];
+Constants.calpoint_dir=[expdir '/InfantCalibration/'];
 Constants.calpoint_size=50;
 
 Constants.HiLeft_LoRight=1;
@@ -73,7 +73,7 @@ Constants.gColor=[255 150 0 255]; %gaze cursor colour
 %---------
 Constants.fpXY=120; %fixation image XY size in pixels
 Constants.sXY=[300 240]; %movie stimulus size
-GREY=[220 220 220]; 
+GREY=[220 220 220];
 
 
 %we use convention that locations of left & right have 0 & 1 assigned
