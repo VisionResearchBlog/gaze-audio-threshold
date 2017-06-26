@@ -15,7 +15,10 @@ http://psychtoolbox.org/
 *—* 
 
 **NOTE**
-It’s highly recommend to run the program using 2 monitors as psychtoolbox
+1. The software was written on a mac so the convenition for directories
+is with ‘/‘ not ‘\’, windows users will need to correct manually for now
+
+2.It’s highly recommend to run the program using 2 monitors as psychtoolbox
 completely takes over one screen and if any crashes occur it can be difficult
 to regain control of matlab aside from force quitting/killing the process. If you
 run matlab on one monitor and have the experiment run on the 2nd it is much
