@@ -60,12 +60,16 @@ while(training)
         if(animate_fix)
             
             Screen('DrawTexture', EXPWIN, blockTex, bRect, FixationSquare);
-        end
+		end
         
-        [left_xyTMP, right_xyTMP, left_pupilTMP, right_pupilTMP, ...
-            left_validityTMP, right_validityTMP, emptyset]=...
-            GetEyeData(ScreenTime(end-1), ScreenTime(end));
-        
+		if(Constants.UseEyeTracker)
+			[left_xyTMP, right_xyTMP, left_pupilTMP, right_pupilTMP, ...
+				left_validityTMP, right_validityTMP, emptyset]=...
+				GetEyeData(ScreenTime(end-1), ScreenTime(end));
+		else
+			UseMouse;
+		end
+		
         if(~emptyset)
             left_xy(end+1,:)=left_xyTMP(end,:);
             right_xy(end+1,:)=right_xyTMP(end,:);
@@ -273,16 +277,23 @@ PsychPortAudio('DeleteBuffer');
 PsychPortAudio('Close');
 
 if(~ESC_PRESSED)
+	if(Constants.UseEyeTracker)
     EyeErrorTestEnd=TestEyeTrackerError(Calib,mOrder,Constants);
-    
+	end
+	
     Screen('FillRect',EXPWIN,GREY);
     Screen(EXPWIN,'Flip');
     WaitSecs(2);
     
-    save(Constants.savefile,'Calib', 'trialScore','AudioStimList','CorrectLocation',...
+    if(Constants.UseEyeTracker)
+		save(Constants.savefile,'Calib', 'trialScore','AudioStimList','CorrectLocation',...
         'EyeErrorTestEnd','Constants','EyeData','StepStimulus', 'PerfCode', ...
         'ReversalCount','TrialData')
-    
+	else
+		save(Constants.savefile,'Calib', 'trialScore','AudioStimList','CorrectLocation',...
+        'Constants','EyeData','StepStimulus', 'PerfCode', ...
+        'ReversalCount','TrialData')
+	end		
 end
 
 Screen('CloseAll')

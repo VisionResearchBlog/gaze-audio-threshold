@@ -4,7 +4,27 @@ Experimental Gaze-contingent software for estimating auditory detection and disc
 This is part of research funded by EU's Marie Curie Initiative LanPercept
 https://www.ntnu.edu/lanpercept
 
-Please consult ReadMe.txt for use instructions. 
+
+*REQUIREMENTS* 
+Matlab is required Earlier versions may or may not 
+work - the current software was developed with Matlab 2016/2017
+https://www.mathworks.com/products/matlab.html
+
+And the Psychophysics toolbox version 3
+http://psychtoolbox.org/
+*—* 
+
+**NOTE**
+It’s highly recommend to run the program using 2 monitors as psychtoolbox
+completely takes over one screen and if any crashes occur it can be difficult
+to regain control of matlab aside from force quitting/killing the process. If you
+run matlab on one monitor and have the experiment run on the 2nd it is much
+easier to see error messages and hit ctrl-c to stop the program instead of
+closing matlab itself, also remeber the command ‘sca’ will close rogue psychtoolbox
+screens (the tend to persist).
+**
+
+
 StartConditioningExps.m is used to run the experiment, and along with
 LoadConstants.m, SetCalibParams.m they form the 3 main files to edit for various 
 parameters, paths, and setting up conditions.

@@ -4,6 +4,16 @@ Experimental Gaze-contingent software for estimating auditory detection and disc
 This is part of research funded by EU's Marie Curie Initiative LanPercept
 https://www.ntnu.edu/lanpercept
 
+*REQUIREMENTS* 
+Matlab is required Earlier versions may or may not 
+work - the current software was developed with Matlab 2016/2017
+https://www.mathworks.com/products/matlab.html
+
+And the Psychophysics toolbox version 3
+http://psychtoolbox.org/
+*—* 
+
+
 Please consult ReadMe.txt for use instructions. 
 StartConditioningExps.m is used to run the experiment, and along with
 LoadContants.m, SetCalibParams.m they form the 3 main files to edit for various 

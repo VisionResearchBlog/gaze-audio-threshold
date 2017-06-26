@@ -42,9 +42,7 @@ Screen('DrawTexture', EXPWIN, blockTex, bRect, FixationSquare);
 ScreenTime(end+1)=Screen(EXPWIN,'Flip');
 
 %audio won´t begin until fixationfor constant.fixThresh
-if(Constants.UseEyeTracker)
-	FixateToBegin
-end
+FixateToBegin
 
 AudioPlayTime=PsychPortAudio('Start', pahandle, [], 0, 1);
 

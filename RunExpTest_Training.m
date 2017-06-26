@@ -91,8 +91,9 @@ while(training)
 			[left_xyTMP, right_xyTMP, left_pupilTMP, right_pupilTMP, ...
 				left_validityTMP, right_validityTMP, emptyset]=...
 				GetEyeData(ScreenTime(end-1), ScreenTime(end));
-		else
-			emptyset=1;
+		else %USE MOUSE
+
+			UseMouse;
 		end
 		
 		if(~emptyset)
@@ -148,7 +149,7 @@ while(training)
 					end
 					%LOOKING AT RIGHT SIDE AOI
 				elseif(EyeInsideLR(end,1)==0 & EyeInsideLR(end,2)==1)
-					if(Constants.LRvisible ~= 1); %1=left only visible
+					if(Constants.LRvisible ~= 1) %1=left only visible
 						if(sum(EyeInsideLR(end-Constants.FixThresh:end,2))>=Constants.FixThresh)
 							%evaluate if we are correct
 							if(CorrectLocation(trial)==Constants.RIGHT)
@@ -174,7 +175,7 @@ while(training)
 			
 			ScreenTime(end+1)=Screen(EXPWIN,'Flip');
 			time_now=GetSecs-t1;
-			keyboard
+
 		else
 			time_now=GetSecs-t1;
 			ScreenTime(end+1)=Screen(EXPWIN,'Flip');
@@ -182,12 +183,11 @@ while(training)
 		
 		if( (finished == 0) & time_now>Constants.trialTime)
 			finished=1;
-			keyboard
 			DrawTimeOutMask;
 			
 			Screen(EXPWIN,'Flip');
 			WaitSecs(Constants.IncorrectTimeOut);
-			keyboard
+
 		end
 		
 		if(~VisStimInit)
@@ -232,7 +232,6 @@ while(training)
 	ISI
 	WaitSecs(ISI);
 	
-	if(Constants.UseEyeTracker)
 		lxy=[left_xy_PRE; left_xy ];
 		rxy=[right_xy_PRE; right_xy];
 		lp=[left_pupil_PRE; left_pupil];
@@ -246,7 +245,6 @@ while(training)
 		EyeData(trial).reye_xypv=[rxy rp rv];
 		EyeData(trial).AOI=eAOI;
 		EyeData(trial).time=eTime;
-	end
 	
 	TrialData(trial).AudioPlayTime=AudioPlayTime;
 	TrialData(trial).VisStimAppearTime=VisStimAppearTime;

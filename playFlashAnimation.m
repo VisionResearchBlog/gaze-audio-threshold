@@ -60,8 +60,11 @@ for fr=1:anim_t_length
         DrawFormattedText(EXPWIN,'?','Center','Center',WHITE,[],[],[],[],[],RightChoiceSquare);
         
     end
-    drawGazeCursor;
-    
+
+	if(Constants.UseEyeTracker)
+		drawGazeCursor;
+	end
+
     Screen(EXPWIN,'Flip');
     WaitSecs(1/60);
 end

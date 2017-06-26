@@ -10,10 +10,14 @@ while (fixateToStart) % wait for press
     Screen('FillRect',EXPWIN,GREY);
     Screen('DrawTexture', EXPWIN, blockTex, bRect, OffsetFixationSquare);
     
-    [left_xyTMP, right_xyTMP, left_pupilTMP, right_pupilTMP, ...
-        left_validityTMP, right_validityTMP, emptyset]=...
-        GetEyeData(ScreenTime(end-1), ScreenTime(end));
-    
+	if(Constants.UseEyeTracker)
+		[left_xyTMP, right_xyTMP, left_pupilTMP, right_pupilTMP, ...
+			left_validityTMP, right_validityTMP, emptyset]=...
+			GetEyeData(ScreenTime(end-1), ScreenTime(end));
+	else
+		UseMouse
+	end
+	
     if(~emptyset)
         left_xy_PRE(end+1,:)=left_xyTMP(end,:);
         right_xy_PRE(end+1,:)=right_xyTMP(end,:);
@@ -62,8 +66,8 @@ while (fixateToStart) % wait for press
         training=0;
         finished=1;
         ESC_PRESSED=1;
-    end
-        
+	end
+	
 end
 
 

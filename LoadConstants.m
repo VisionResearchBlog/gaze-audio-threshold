@@ -7,7 +7,7 @@ DEBUG=0; %turn  to 1 if already have calibrated eye track
 eyetrackerhost = 'TX300-010105528621.local.'; %ellie's tracker
 Constants.UseEyeTracker=0;
 
-Constants.FixThresh=20; %20*16.67=333ms?? @ 60hz samples Fixation Duration Movie Target
+Constants.FixThresh=20; %30*16.67=333ms?? @ 60hz samples Fixation Duration Movie Target
 Constants.trialTime=6; %trial timeout - 6 seconds
 
 Constants.ISI_RATE=0.5; %interstimulus interval maximum
