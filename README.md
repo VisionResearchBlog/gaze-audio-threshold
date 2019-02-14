@@ -11,6 +11,14 @@ https://www.mathworks.com/products/matlab.html
 
 And the Psychophysics toolbox version 3
 http://psychtoolbox.org/
+
+Note this code was originally developed for TobiiSDK 3.0.83
+Tobii has subsequently completed revised their SDK. We have included
+the old SDK in the repository 'tobii-analytics-sdk-3.0.83.zip'
+
+In the future we hope the code base will be updated to reflect the new SDK
+https://www.tobiipro.com/product-listing/tobii-pro-sdk/
+
 *—* 
 
 
