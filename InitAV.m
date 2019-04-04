@@ -67,10 +67,6 @@ end
 %SETUP & RESET FLAGS for individual trials
 finished=0;
 
-if(Constants.UseEyeTracker)
-	%flush eye buffer before starting new recordings
-	tetio_readGazeData;
-end
 
 t1=GetSecs; %use last flip instead?
 EyeInsideLR=[];

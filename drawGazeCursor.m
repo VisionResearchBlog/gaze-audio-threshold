@@ -1,7 +1,5 @@
 %get recent eye pos
-[left_xyTMP, right_xyTMP, left_pupilTMP, right_pupilTMP, ...
-    left_validityTMP, right_validityTMP, emptyset]=...
-    GetEyeData(ScreenTime(end-1), ScreenTime(end));
+GetGazeDataTypes
 
 %window to average cursor over
 c=5;

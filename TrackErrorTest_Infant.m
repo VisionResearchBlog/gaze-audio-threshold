@@ -27,11 +27,11 @@ movieWidthReduced = Constants.calpoint_size; % movieWidth*0.5;
 movieHeightReduced = Constants.calpoint_size;  %movieHeight*0.5;
 
 validmat = ones(1,Calib.points.n);
-tetio_readGazeData;
 WaitSecs(0.25);
 
 for  i =1:Calib.points.n
     
+ 
     vidObj=VideoReader(moviename);
     [Y,FS] = audioread(moviename);
     
@@ -47,8 +47,8 @@ for  i =1:Calib.points.n
     sRect (4) = round(Calib.screen.height*Calib.points.y(morder(i))+movieHeightReduced/2);
     
     %sound(Y*Constants.CalVolume,FS) %soften sound
-   sound(Y*Constants.CalVolume, FS*((length(Y)/FS)/Constants.CalVideoLength) )
-            
+    sound(Y*Constants.CalVolume, FS*((length(Y)/FS)/Constants.CalVideoLength) )
+    
     Screen('FillRect',EXPWIN,BLACK);
     t1=Screen('Flip', EXPWIN);
     
@@ -73,17 +73,23 @@ for  i =1:Calib.points.n
         
         %calculate appropriate wait time to enforce common length
         WaitSecs(1/(round(vidObj.Duration*vidObj.FrameRate)/Constants.CalVideoLength));
-
+        
     end
     
-    t2=Screen(EXPWIN, 'Flip');
-    [eyes.left(i).xy, eyes.right(i).xy, eyes.left(i).pupil, eyes.right(i).pupil, ...
-        eyes.left(i).validity, eyes.right(i).validity]=GetEyeData(t1, t2);
+    %t2=Screen(EXPWIN, 'Flip');
+    GazeDataCurrent= Calib.tracker.get_gaze_data();
+    GazeData = ParseGazeData(GazeDataCurrent); % Parse last gaze data.
+    
+    eyes.left(i).xy=[GazeData.left_gaze_point_2d.x GazeData.left_gaze_point_2d.y];
+    eyes.right(i).xy=[GazeData.right_gaze_point_2d.x GazeData.right_gaze_point_2d.y];
+    eyes.left(i).pupil=GazeData.left_pupil_diameter;
+    eyes.right(i).pupil=GazeData.right_pupil_diameter;
+    eyes.left(i).validity=GazeData.left_validity;
+    eyes.right(i).validity=GazeData.right_validity ;
+    
     disp(['Point: ' num2str(i)])
     
     
-    %   [left_xy, right_xy, left_pupil, right_pupil, left_validity,...
-    %    right_validity, emptyset]
 end
 
 
@@ -91,13 +97,6 @@ Screen('FillRect',EXPWIN,Calib.bkcolor*255);
 Screen(EXPWIN, 'Flip');
 disp('Out Tracker Test')
 
-
-% figure(1); clf; hold on;
-% for  i =1:Calib.points.n
-%     plot(eyes.left(i).xy(:,1), eyes.left(i).xy(:,2),'*')
-%     plot(eyes.right(i).xy(:,1), eyes.right(i).xy(:,2),'r*')
-%
-% end
 
 
 return

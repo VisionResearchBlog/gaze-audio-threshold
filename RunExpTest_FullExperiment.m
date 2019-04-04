@@ -63,9 +63,7 @@ while(training)
 		end
         
 		if(Constants.UseEyeTracker)
-			[left_xyTMP, right_xyTMP, left_pupilTMP, right_pupilTMP, ...
-				left_validityTMP, right_validityTMP, emptyset]=...
-				GetEyeData(ScreenTime(end-1), ScreenTime(end));
+			 GetGazeDataTypes
 		else
 			UseMouse;
 		end

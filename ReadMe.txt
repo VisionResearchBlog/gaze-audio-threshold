@@ -19,13 +19,12 @@ the old SDK in the repository 'tobii-analytics-sdk-3.0.83.zip'
 
 In the future we hope the code base will be updated to reflect the new SDK
 https://www.tobiipro.com/product-listing/tobii-pro-sdk/
-*—* 
 
 **NOTE**
-1. The software was written on a mac so the convenition for directories
-is with ‘/‘ not ‘\’, windows users will need to correct manually for now
+1. The software was written on a mac & pc so the convenition for directories
+needs to be altered as needed from '/' to '\'
 
-2.It’s highly recommend to run the program using 2 monitors as psychtoolbox
+2.It's highly recommend to run the program using 2 monitors as psychtoolbox
 completely takes over one screen and if any crashes occur it can be difficult
 to regain control of matlab aside from force quitting/killing the process. If you
 run matlab on one monitor and have the experiment run on the 2nd it is much
@@ -36,9 +35,10 @@ screens (the tend to persist).
 
 **Data Files & Analysis**
 Please see data directory (be sure to create one before 1st run in the main experiment
-code directory else matlab will give an error since it can’t save) for files.
+code directory else matlab will give an error since it can't save) for files.
 See the analysis directory for code examples to generate graphs of the data as seen
-in the paper
+in the paper. All data is stored in /data/ use files in /analysis/ , the primary
+files to use to generate graphs or output are SummaryScores.m and ThresholdData.m')
 **
 
 StartConditioningExps.m is used to run the experiment, and along with
@@ -50,10 +50,11 @@ eye tracking, choosing stimuli, and setting up number of conditions etc should b
 
 
 The code contained here is available for research purposes only and is described in more detail via
-(Sullivan,Wilson, and Saldana, submitted 2017)
+Sullivan B, Wilson CE, Saldana D. (2019). Development of a gaze contingent 
+method for auditory threshold evaluation in non-verbal ASD children. 
+Research in Autism Spectrum Disorders. Volume 62, June 2019, Pages 85-98
 
-Copyright Wilson & Sullivan 2016, (Seville, Spain / Stockholm, Sweden)
-——————————————
+Copyright Wilson & Sullivan 2016-19, (Seville, Spain / Stockholm, Sweden)
 
 
 Keyboard Commands:

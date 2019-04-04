@@ -1,18 +1,19 @@
 global EXPWIN GREY Calib
-MONITOR=1; %set to zero for running exp
+MONITOR=1; %set to zero for running exp (matlab on windows has bad timing with 2+ monitors)
 SKIP_SYNC=1; %Should be set to 0 when running exp, 1 for programming - ie if you have 2 screens on
-DEBUG=0; %turn  to 1 if already have calibrated eye track
+DEBUG=1; %turn  to 1 if already have calibrated eye track
 
-%eyetrackerhost = 'TX300-010102211502.local.' %brian's tracker
-eyetrackerhost = 'TX300-010105528621.local.'; %ellie's tracker
+%Note several constants are defined using knowledge of the presentations
+%screen refresh rate and the eye tracker sampling rate - values here are
+%for a 60hz Tobii Pro Nano - be sure to change for your setup
+
 Constants.UseEyeTracker=0;
-
-Constants.FixThresh=20; %30*16.67=333ms?? @ 60hz samples Fixation Duration Movie Target
+Constants.FixThresh=20; %20*16.67=333ms @ 60hz samples (requitred fixation duration on target to be correct)
 Constants.trialTime=6; %trial timeout - 6 seconds
 
-Constants.ISI_RATE=0.5; %interstimulus interval maximum
-Constants.ISI_MAX=3; %interstimulus interval maximum
-Constants.ISI_MIN=0.5; %interstimulus interval minumum
+Constants.ISI_RATE=0.5; %interstimulus interval maximum (seconds)
+Constants.ISI_MAX=3; %interstimulus interval maximum (seconds)
+Constants.ISI_MIN=0.5; %interstimulus interval minumum (seconds)
 Constants.ISI_INIT=Constants.ISI_RATE+Constants.ISI_MAX;
 
 %For training trials only: TrialCorrect must be less or equal to
@@ -30,12 +31,14 @@ Constants.TrainingTrials=1; %if it is training
 %Constants.AnimatedTrials=0; %how many trials at beginning need animated fixaiton point
 %Constants.animate_fix=0; %slide character across screen to choice?
 
-Constants.IncorrectTimeOut=1.5;
-Constants.ShakeFixThresh=120; %when to start attention grabber 120frames = 2s
-Constants.FixThreshFixationImage=18; %18*16.67=300ms
-Constants.CalVolume=0.05; %18*16.67=300ms Volume on calibration sounds for infant
-Constants.CalVideoLength=1.5; %specify desired duration for calibration video
+Constants.IncorrectTimeOut=1.5; %(seconds)
+Constants.ShakeFixThresh=120; %when to start attention grabber 120frames*16.67@60hz = 2s
+Constants.FixThreshFixationImage=18; %18*16.67(60hz)=300ms
+Constants.CalVolume=0.05; %18*16.67(60hz)=300ms Volume on calibration sounds for infant
+Constants.CalVideoLength=1.5; %(seconds) specify desired duration for calibration video
 %-----------------------------------------
+
+AttentionMovieFile='Pocoyo 3x00 El Show de Pocoyo.mov';
 
 
 ESC_PRESSED=0;
@@ -69,11 +72,11 @@ Constants.calpoint_size=50;
 Constants.HiLeft_LoRight=1;
 Constants.HiRight_LoLeft=2;
 
-Constants.gColor=[255 150 0 255]; %gaze cursor colour
+Constants.gColor=[255 150 0 255]; %gaze cursor colour RGB
 %---------
 Constants.fpXY=120; %fixation image XY size in pixels
-Constants.sXY=[300 240]; %movie stimulus size
-GREY=[220 220 220];
+Constants.sXY=[300 240]; %movie stimulus size in pixels
+GREY=[220 220 220]; %colour RGB neutral grey
 
 
 %we use convention that locations of left & right have 0 & 1 assigned

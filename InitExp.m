@@ -49,20 +49,19 @@ RightChoiceSquare=[3*(Calib.screen.width/4)-Constants.sXY(1)/2, ...
 
 
 if(Constants.UseEyeTracker)
+    Tobii = EyeTrackingOperations();
+    found_eyetrackers = Tobii.find_all_eyetrackers();
+    Calib.tracker = found_eyetrackers(1)
+
 	if(DEBUG)
-		try
-			tetio_stopTracking;
-		end
-		tetio_startTracking;
-		
+        %use last calibration, do nothing
+        EyeErrorTestStart=[];
 	else
 		Tobii_calibration_with_psychtoolbox;
-		tetio_startTracking;
 		mOrder = randperm(Calib.points.n);
 		EyeErrorTestStart=TestEyeTrackerError(Calib,mOrder,Constants);
 	end
 end
-
 
 
 Incorrect_img='Incorrect';

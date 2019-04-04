@@ -16,7 +16,9 @@ end
 
 [EXPWIN, winRect] = Screen('OpenWindow', Calib.screenNumber);
 
-Calib.screen.sz=[ 51 28.5];  %screen dimensions of the TX300
+%in future we should be able to get dimensions automated
+Calib.screen.sz=[43.5 26.7];  %display screen dimensions  (cm) 
+
 Calib.screen.vdist= 60; % Observer's viewing distance to screen (cm)
 
 disp(['Using Viewing Distance of: ' num2str(Calib.screen.vdist) ...

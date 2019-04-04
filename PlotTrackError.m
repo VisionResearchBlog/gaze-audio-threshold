@@ -29,6 +29,7 @@ for i = 1:length(Calib.points.x)
     %alter the data streams dependent on whether it was from the calibration
     %or from a retest
     ldat=testData.left(i).xy; rdat=testData.right(i).xy;
+    
     calib_pt_x=Calib.screen.width*Calib.points.x(mOrder(i));
     calib_pt_y=Calib.screen.height*Calib.points.y(mOrder(i));
     reye=[Calib.screen.width*rdat(:,1) Calib.screen.height*rdat(:,2)];
@@ -39,14 +40,14 @@ for i = 1:length(Calib.points.x)
     dotLoc(3) = calib_pt_x + Calib.SmallMark;
     dotLoc(4) = calib_pt_y + Calib.SmallMark;
     
-    for j=1:length(reye)
+    for j=1:size(reye,1)
         Screen('DrawText', EXPWIN, 'o',reye(j,1), reye(j,2), [255 0 0]);
     end
     
     Rx_delta=reye(:,1)-calib_pt_x;
     Ry_delta=reye(:,2)-calib_pt_y;
     
-    for j=1:length(leye)
+    for j=1:size(leye,1)
         Screen('DrawText', EXPWIN, 'o',leye(j,1), leye(j,2), [0 255 0]);
     end
     

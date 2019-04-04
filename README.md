@@ -19,7 +19,6 @@ the old SDK in the repository 'tobii-analytics-sdk-3.0.83.zip'
 In the future we hope the code base will be updated to reflect the new SDK
 https://www.tobiipro.com/product-listing/tobii-pro-sdk/
 
-*—* 
 
 
 Please consult ReadMe.txt for use instructions. 
@@ -27,10 +26,14 @@ StartConditioningExps.m is used to run the experiment, and along with
 LoadContants.m, SetCalibParams.m they form the 3 main files to edit for various 
 parameters, paths, and setting up conditions.
 
-The code contained here is available for research purposes only and is described in more detail via
-(Sullivan,Wilson, and Saldana, submitted 2017)
 
-Copyright Wilson & Sullivan 2016, (Seville, Spain / Stockholm, Sweden)
+The code contained here is available for research purposes only and is described in more detail via
+Sullivan B, Wilson CE, Saldana D. (2019). Development of a gaze contingent 
+method for auditory threshold evaluation in non-verbal ASD children. 
+Research in Autism Spectrum Disorders. Volume 62, June 2019, Pages 85-98
+
+Copyright Wilson & Sullivan 2016-19, (Seville, Spain / Stockholm, Sweden)
+ (Seville, Spain / Stockholm, Sweden)
 
 Gaze Audio Threshold is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
