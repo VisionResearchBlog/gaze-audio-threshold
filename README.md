@@ -19,6 +19,13 @@ the old SDK in the repository 'tobii-analytics-sdk-3.0.83.zip'
 In the future we hope the code base will be updated to reflect the new SDK
 https://www.tobiipro.com/product-listing/tobii-pro-sdk/
 
+***Please note as of 04/04/2019 I have created a branch for Tobii Pro SDK 1.6 tested
+on a Tobii Pro Nano - This branch will become the only version developed soon.
+Mouse mode works as before but currently the performance becomes very slow
+when using eye tracking very late in the testing session. However, the new
+branch has several small updates so it will be preferred once this performance bug is resolved***
+
+
 *—* 
 
 
